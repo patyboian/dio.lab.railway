@@ -12,18 +12,21 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // pra gente pegar o log
     private final Logger logger  = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    // Erro para inserir cliente repetido.
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleBusinessException(IllegalArgumentException businessException) {
         return new ResponseEntity<>(businessException.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
+    // Erro qd não encontrar o usuário
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handleNotFoundException(NoSuchElementException notFoundException) {
         return new ResponseEntity<>("Resource ID not found.", HttpStatus.NOT_FOUND);
     }
-
+//Qualquer outro erro.
     @ExceptionHandler(Throwable.class)
     public ResponseEntity<String> handleUnexpectedException(Throwable unexpectedException) {
         var message = "Unexpected server error, see the logs.";

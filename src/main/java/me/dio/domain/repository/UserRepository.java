@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByAccountNumber(String accountNumber);
+    // o spring já entende colocando o existsByAccountNumber que ele tem que fazer um join
+    // pra verificar se a conta já existe.
 }
